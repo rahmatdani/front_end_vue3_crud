@@ -19,7 +19,7 @@
           <td>{{index}}</td>
           <td>{{row.nama}}</td>
           <td>{{row.kelas}}</td>
-          <td><button type="botton" @click="simpan">Hapus</button></td>
+          <td><button type="botton" @click="hapus(row.id)">Hapus</button></td>
         </tr>
       </tbody>
     </table>
@@ -35,7 +35,6 @@ export default {
     nama:"",
     kelas:"",
     })
-    const data = ref('aku adalah data')
     return {
       data,
       saya: ref('rahmatdani'),
@@ -62,6 +61,13 @@ export default {
       this.form.nama=""
       this.form.kelas=""
       this.info="data berhasil di simpan"
+      this.daridb  // di masukkan ke sini lagi untuk menampilkan data secara real time
+      return res
+    })
+  },
+  async hapus($id){
+    await axios.delete("http://192.168.101.17:5000/api/siswa/hapus/"+$id).then((res)=>{
+      this.ambilData()
       return res
     })
   }
